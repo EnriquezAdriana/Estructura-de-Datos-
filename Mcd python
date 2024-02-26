@@ -1,0 +1,10 @@
+def mcd(a,b):
+    if b==0:
+        return a
+    else:
+        return mcd(b,a%b)
+    
+   
+n1=int(input("Ingrese el primer numero: "))
+n2=int(input("Ingrese el segundo numero:"))
+print("El maximo común divisor de: ",n1,"y",n2," es:",mcd(n1,n2))
