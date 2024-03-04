@@ -1,0 +1,9 @@
+class Complex:
+    def __init__(self, realpart, imagpart):
+        self.r = realpart
+        self.i = imagpart
+re=float(input("Ingrese la parte real: ))
+in=float(input("Ingrese la parte imaginaria:))
+#Crea el objeto x de la clase Complex- instancia en python 
+x = Complex(re, in)
+x.r, x.i
