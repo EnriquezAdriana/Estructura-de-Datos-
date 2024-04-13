@@ -1,0 +1,102 @@
+ #include <iostream>
+#include <string>
+
+using namespace std;
+
+class Dato 
+{	
+public:
+    double Codigo;
+    string Nombre;
+    string Carrera;
+    Dato() {
+        Codigo = 0;
+        Nombre = "Unknow";
+        Carrera = "Unknow";
+    }
+};
+
+class Nodo 
+{	
+public:
+    Dato dato;
+    Nodo* puntero;
+    Nodo() { 
+        puntero = NULL;
+    }
+};
+
+class Cola	
+{
+private:
+	Nodo* inicio;
+	Nodo* final;
+public:
+	Cola();
+	void Encolar(Nodo*& inicio, Nodo*& final);
+	void Desencolar(Nodo*& inicio);
+};
+
+Cola::Cola() {
+
+}
+
+void Cola::Encolar(Nodo*& inicio, Nodo*& final) {       
+    Nodo* Elemento = new Nodo;      
+    if (inicio == NULL) {
+        inicio = final = Elemento;          
+        cout << "Codigo: "; cin >> Elemento->dato.Codigo;
+        cout << "Nombres: s"; cin >> Elemento->dato.Nombre;
+        cout << "Carrera: "; cin >> Elemento->dato.Carrera;
+    }
+    else {
+        final->puntero = Elemento; 
+        final = Elemento;  
+        cout << "Codigo: "; cin >> Elemento->dato.Codigo;
+        cout << "Nombres: "; cin >> Elemento->dato.Nombre;
+        cout << "Carrera: "; cin >> Elemento->dato.Carrera; cout << endl;
+    }
+}
+
+void Cola::Desencolar(Nodo*& inicio) {
+    if (inicio != NULL) {
+        cout << "Codigo: " << inicio->dato.Codigo << endl;
+        cout << "Nombres: " << inicio->dato.Nombre << endl;
+        cout << "Carrera: " << inicio->dato.Carrera << endl;
+        inicio = inicio->puntero; 
+    }
+    else {
+        cout << "La cola está vacía " << endl;
+    }
+}
+
+int main(int argc, char* argv[]) {
+    Cola cola;
+    Nodo* inicio = NULL, * final = NULL; 
+    int opc = 0, respuesta = 0;
+    do {
+        cout <<"----BIENVENIDO----"<<endl;
+        cout<<"----INGRESE UNA OPCIÓN----"<<endl;
+        cout << "1. VERIFICAR SI HAY ELEMENTOS EN LA COLA" << endl; 
+        cout << "2. ENCOLAR" << endl;
+        cout << "3. DESENCOLAR" << endl;
+        cout << "4. FINALIZAR" << endl;
+        cout << "Opcion: "; cin >> opc;
+        switch (opc) {
+        case 1:
+            if (inicio == NULL)
+                cout << "La cola está vacia" << endl;
+            else
+                cout << "Existe elemento(s) dentro de la cola" << endl;
+            break;
+        case 2:
+            cola.Encolar(inicio, final);
+            break;
+        case 3:
+            cola.Desencolar(inicio);
+            break;
+        }
+    } while (opc != 4);
+
+    return 0;
+}
