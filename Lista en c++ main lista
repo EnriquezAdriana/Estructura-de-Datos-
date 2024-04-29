@@ -1,0 +1,16 @@
+#include <iostream>
+#include"ListaEnlazada.h"
+
+int main()
+{
+    string nombre, habitat, estado;
+    ListaEnlazada listaAnimales,
+        cout << "INGRESAR ANIMAL: ";
+    cin >> nombre;
+    cout << "INGRESAR HABITAT ";
+    cin >> habitat;
+    cout << "INGRESAR ESTADO:";
+    cin >> estado;
+    listaAnimales.agregarAnimal(nombre, habitat, estado);
+
+}
