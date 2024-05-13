@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+class ArchivoClientes {
+private:
+    string nombreArchivo;
+
+public:
+    ArchivoClientes(string nombre) : nombreArchivo(nombre) {}
+
+    void agregarCliente(const string& nombre, int ci, int celular) {
+        ofstream archivo(nombreArchivo, ios::binary | ios::app); // Abre el archivo en modo binario y adjuntar al final
+        if (archivo.is_open()) {
+            // Escribir los datos del cliente en binario
+            archivo.write(reinterpret_cast<const char*>(&ci), sizeof(int)); // Escribir la cédula de identidad
+            archivo.write(reinterpret_cast<const char*>(&celular), sizeof(int)); // Escribir el número de celular
+
+            // Escribir el nombre del cliente como una cadena de caracteres
+            int longitudNombre = nombre.length(); // Obtener la longitud del nombre
+            archivo.write(reinterpret_cast<const char*>(&longitudNombre), sizeof(int)); // Escribir la longitud del nombre
+            archivo.write(nombre.c_str(), longitudNombre); // Escribir el nombre como una cadena de caracteres
+            cout << "Cliente agregado correctamente." << endl;
+            archivo.close(); // Cierra el archivo
+        } else {
+            cout << "Error: No se pudo abrir el archivo." << endl;
+        }
+    }
+};
+
+int main() {
+    ArchivoClientes archivo("clientes.bin");
+
+    // Ejemplo de uso
+    archivo.agregarCliente("Juan Perez", 1234567, 999888777);
+    archivo.agregarCliente("Maria Gomez", 9876543, 555444333);
+
+    return 0;
+}
